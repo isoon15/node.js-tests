@@ -17,3 +17,8 @@ console.log(cowsay.think({
 }))
 
 console.log("hello world! from run.js")
+
+const {
+    print
+} = require("F:/code/NodeJs/pack/packk")
+print("salam")

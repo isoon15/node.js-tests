@@ -15,3 +15,5 @@ console.log(cowsay.think({
     'e' : "oO",
     'T' : 'U'
 }))
+
+console.log("hello world! from run.js")

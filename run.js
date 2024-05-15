@@ -31,3 +31,11 @@ console.log(hello)
 // process.argv.forEach((val,index) => {
 //     console.log(val)
 // });
+
+const readline = require('readline')
+const rl = readline.createInterface({
+    input : process.stdin,
+    output : process.stdout
+});
+
+rl.question('tell us about your feedback: ', (answer) => console.log(`thank you for your feedback: ${answer}`))

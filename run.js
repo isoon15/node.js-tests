@@ -40,5 +40,21 @@ const rl = readline.createInterface({
 
 rl.question('tell us about your feedback: ', (answer) => {
      console.log(`thank you for your feedback: ${answer}`)
-     rl.close()
+    //  rl.close()
     })
+const as = readline.clearScreenDown
+const full = [];
+rl.on('line', input => {
+    if(input.length < 3){
+        console.log('please enter a vaild name')
+        return
+    }
+    if(input === 'stop'){
+        console.log('bye bye!!')
+        rl.close()
+        return
+    }
+    full.push(input)
+    console.log(`your students : ${full}`)
+
+});

@@ -38,4 +38,7 @@ const rl = readline.createInterface({
     output : process.stdout
 });
 
-rl.question('tell us about your feedback: ', (answer) => console.log(`thank you for your feedback: ${answer}`))
+rl.question('tell us about your feedback: ', (answer) => {
+     console.log(`thank you for your feedback: ${answer}`)
+     rl.close()
+    })

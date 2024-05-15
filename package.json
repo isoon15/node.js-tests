@@ -3,7 +3,8 @@
     "cowsay": "^1.6.0",
     "cowsay2": "^2.0.4",
     "debug": "^4.3.4",
-    "log-update": "^6.0.0"
+    "log-update": "^6.0.0",
+    "minimist": "^1.2.8"
   },
   "name": "first_folder",
   "version": "1.0.0",
@@ -16,8 +17,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node run.js && echo goodbye"
   },
-  "bin" :{
-    "projstart" : "run.js"
+  "bin": {
+    "projstart": "run.js"
   },
   "author": "",
   "license": "ISC"

@@ -26,7 +26,7 @@ print("salam")
 
 
 const hello = require('minimist')(process.argv.slice(2))
-// console.log(hello['se[pehr'])
+console.log(hello)
 
 // process.argv.forEach((val,index) => {
 //     console.log(val)

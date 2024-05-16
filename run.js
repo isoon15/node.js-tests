@@ -58,3 +58,21 @@ rl.on('line', input => {
     console.log(`your students : ${full}`)
 
 });
+
+rl.on('SIGINT', () => {
+    console.log('bye bye from ctrl c')
+    rl.close()
+});
+
+// const inq = require("inquirer")
+
+// var question = [
+//     {
+//         type: 'input',
+//         name: 'sepehr',
+//         message: 'please enter your opinion about our website'
+//     }
+// ]
+// inq.prompt(question).then(answer => {
+//     console.log(`hello your answer is ${answer ['name']}`)
+// })

@@ -32,47 +32,48 @@ console.log(hello)
 //     console.log(val)
 // });
 
-const readline = require('readline')
-const rl = readline.createInterface({
-    input : process.stdin,
-    output : process.stdout
-});
+// const readline = require('readline')
+// const rl = readline.createInterface({
+//     input : process.stdin,
+//     output : process.stdout
+// });
 
-rl.question('tell us about your feedback: ', (answer) => {
-     console.log(`thank you for your feedback: ${answer}`)
-    //  rl.close()
-    })
-const as = readline.clearScreenDown
-const full = [];
-rl.on('line', input => {
-    if(input.length < 3){
-        console.log('please enter a vaild name')
-        return
-    }
-    if(input === 'stop'){
-        console.log('bye bye!!')
-        rl.close()
-        return
-    }
-    full.push(input)
-    console.log(`your students : ${full}`)
-
-});
-
-rl.on('SIGINT', () => {
-    console.log('bye bye from ctrl c')
-    rl.close()
-});
-
-// const inq = require("inquirer")
-
-// var question = [
-//     {
-//         type: 'input',
-//         name: 'sepehr',
-//         message: 'please enter your opinion about our website'
+// rl.question('tell us about your feedback: ', (answer) => {
+//      console.log(`thank you for your feedback: ${answer}`)
+//     //  rl.close()
+//     })
+// const as = readline.clearScreenDown
+// const full = [];
+// rl.on('line', input => {
+//     if(input.length < 3){
+//         console.log('please enter a vaild name')
+//         return
 //     }
-// ]
-// inq.prompt(question).then(answer => {
-//     console.log(`hello your answer is ${answer ['name']}`)
-// })
+//     if(input === 'stop'){
+//         console.log('bye bye!!')
+//         rl.close()
+//         return
+//     }
+//     full.push(input)
+//     console.log(`your students : ${full}`)
+
+// });
+
+// rl.on('SIGINT', () => {
+//     console.log('bye bye from ctrl c')
+//     rl.close()
+// });
+
+const inq = require("inquirer")
+
+var question = [
+    {
+        'type': 'input',
+        'name': 'sepehr',
+        'message': 'please enter your opinion about our website'
+    }
+]
+inq.prompt(question).then(answer => {
+    console.log(`hello your answer is ${answer['sepehr']}`)
+})
+

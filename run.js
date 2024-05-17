@@ -66,14 +66,47 @@ console.log(hello)
 
 const inq = require("inquirer")
 
-var question = [
+var questions = [
     {
         'type': 'input',
-        'name': 'sepehr',
-        'message': 'please enter your opinion about our website'
+        'name': 'name',
+        'message': 'please enter your name'
+    }
+    // {
+    //     type : 'input',
+    //     name : 'barad',
+    //     message : 'barad cheghadt ahmaghe'
+    // }
+]
+var questions1 = [
+    {
+        'type': 'input',
+        'name': 'fine',
+        'message': 'how are you?'
     }
 ]
-inq.prompt(question).then(answer => {
-    console.log(`hello your answer is ${answer['sepehr']}`)
-})
+// function ques(func){
+    // inq.prompt(questions).then(answer => {
+    //     console.log('hello %s ?', answer['name'])
+    //     func()
+    // })
+    
+// }
 
+// function ques2(){
+    // inq.prompt(questions1).then(answer => {
+    //     console.log('what can i do for you?')
+    // })
+// }
+
+// ques(ques2)
+
+
+
+inq.prompt(questions).then(answer => {
+    console.log('hello %s ', answer['name'])
+}).then( e => {
+    inq.prompt(questions1).then(answer => {
+        console.log('sorry i need to go')
+    })
+})

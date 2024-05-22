@@ -138,7 +138,7 @@ print(chalk.red.italic.bgGreenBright("hello world"))
 
 var ProgressBar = require('progress');
  
-var bar = new ProgressBar(':bar', { total: 50 });
+var bar = new ProgressBar(':bar', { total: 20 });
 var timer = setInterval(() => {
   bar.tick();
   if (bar.complete) {
@@ -146,3 +146,69 @@ var timer = setInterval(() => {
     clearInterval(timer);
   }
 }, 100);
+
+// const http = require('http')
+
+// const port = 8080;
+
+// let server = http.createServer((req,res) => {
+//     console.log('reseponse on port 8080')
+//     res.writeHead(200 , {'C.ontect-Type': 'text/html'});
+//     res.end(' <h1>salam esm man sepehre </h1>')
+// }
+// )
+// server.listen(port, () => console.log(`server running at port ${port}`))
+
+const fs = require('fs');
+const http = require('http');
+
+http.createServer(function (req, res) {
+    var mainUrl = req.url.split('?');
+    console.log('Listening on port: 8080');
+    if(mainUrl[1]){
+        console.log(`Now we have data!! Here's your data: ${mainUrl[1]}`);
+    }
+    
+    var mimeTypes = {
+        "html": "text/html",
+        "jpeg": "image/jpeg",
+        "jpg": "image/jpeg",
+        "png": "image/png",
+        "svg": "image/svg+xml",
+        "json": "application/json",
+        "js": "text/javascript",
+        "css": "text/css"
+    };
+
+    if (req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString(); // convert Buffer to string
+        });
+        req.on('end', () => {
+            console.log(`Received POST data: ${body}`);
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Data received', data: JSON.parse(body) }));
+        });
+    } else if (req.method === 'GET') {
+        fs.readFile('F:/code/NodeJs/first_folder/html/page' + mainUrl[0], function (err, data) {
+            if (err) {
+                res.writeHead(404);
+                res.end(JSON.stringify(err));
+                return;
+            }
+            var mimeType = mimeTypes[mainUrl[0].split('.').pop()];
+
+            if (!mimeType) {
+                mimeType = 'text/plain';
+            }
+
+            res.writeHead(200, { "Content-Type": mimeType });
+            res.write(data, "binary");
+            res.end();
+        });
+    } else {
+        res.writeHead(405, { 'Content-Type': 'text/plain' });
+        res.end('Method Not Allowed');
+    }
+}).listen(8080);

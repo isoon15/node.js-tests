@@ -8,7 +8,7 @@ const options = {
     hostname : 'localhost',
     port : 8080,
     path : '/api1.json',
-    metod : 'POST',
+    method : 'POST',
 };
 
 

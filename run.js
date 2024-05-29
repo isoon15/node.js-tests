@@ -162,13 +162,14 @@ var timer = setInterval(() => {
 const fs = require('fs');
 const http = require('http');
 
+
+
 http.createServer(function (req, res) {
     var mainUrl = req.url.split('?');
     console.log('Listening on port: 8080');
     if(mainUrl[1]){
-        console.log(`Now we have data!! Here's your data: ${mainUrl[1]}`);
+        console.log(` now we have data!! heres your data : ${mainUrl[1]}`)
     }
-    
     var mimeTypes = {
         "html": "text/html",
         "jpeg": "image/jpeg",
@@ -180,35 +181,32 @@ http.createServer(function (req, res) {
         "css": "text/css"
     };
 
-    if (req.method === 'POST') {
-        let body = '';
-        req.on('data', chunk => {
-            body += chunk.toString(); // convert Buffer to string
-        });
-        req.on('end', () => {
-            console.log(`Received POST data: ${body}`);
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ message: 'Data received', data: JSON.parse(body) }));
-        });
-    } else if (req.method === 'GET') {
-        fs.readFile('F:/code/NodeJs/first_folder/html/page' + mainUrl[0], function (err, data) {
-            if (err) {
-                res.writeHead(404);
-                res.end(JSON.stringify(err));
-                return;
-            }
-            var mimeType = mimeTypes[mainUrl[0].split('.').pop()];
+    let postdata = '';
+    
+    req.on('data', datapart => {
+        console.log('we recive data')
+        console.log(datapart)
+        postdata += datapart;
+    })
+    
+    req.on('data', () => {
+        console.log(JSON.parse(postdata))
+    })
 
-            if (!mimeType) {
-                mimeType = 'text/plain';
-            }
+    fs.readFile('F:/code/NodeJs/first_folder/html/page' + mainUrl[0], function (err, data) {
+        if(err){
+            res.writeHead(404);
+            res.end(JSON.stringify(err))
+            return;
+        }
+        var mimeType = mimeTypes[mainUrl[0].split('.').pop()];
 
-            res.writeHead(200, { "Content-Type": mimeType });
-            res.write(data, "binary");
-            res.end();
-        });
-    } else {
-        res.writeHead(405, { 'Content-Type': 'text/plain' });
-        res.end('Method Not Allowed');
-    }
+        if (!mimeType) {
+            mimeType = 'text/plain'
+        }
+
+        res.writeHead(200, { "Content-Type": mimeType });
+        res.write(data, "binary");
+        res.end();
+    });
 }).listen(8080);

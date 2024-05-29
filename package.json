@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "axios": "^1.7.2",
     "chalk": "^4.1.2",
     "cowsay": "^1.6.0",
     "cowsay2": "^2.0.4",

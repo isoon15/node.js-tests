@@ -8,6 +8,7 @@
     "inquirer": "^8.0.0",
     "log-update": "^6.0.0",
     "minimist": "^1.2.8",
+    "path": "^0.12.7",
     "progress": "^2.0.3"
   },
   "name": "first_folder",

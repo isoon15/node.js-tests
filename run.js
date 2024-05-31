@@ -1,24 +1,24 @@
 #!/usr/bin/env node
 
-console.clear()
+// console.clear()
 
-const cowsay = require('cowsay')
-const minimist = require('minimist')
+// const cowsay = require('cowsay')
+// const minimist = require('minimist')
 
-console.log(cowsay.say({
-    'text' : "hello world!",
-    'e' : "oO",
-    'T' : 'U'
-}))
+// console.log(cowsay.say({
+//     'text' : "hello world!",
+//     'e' : "oO",
+//     'T' : 'U'
+// }))
 
 
-console.log(cowsay.think({
-    'text' : "hello world!",
-    'e' : "oO",
-    'T' : 'U'
-}))
+// console.log(cowsay.think({
+//     'text' : "hello world!",
+//     'e' : "oO",
+//     'T' : 'U'
+// }))
 
-console.log("hello world! from run.js")
+// console.log("hello world! from run.js")
 
 // const {
 //     print
@@ -26,8 +26,8 @@ console.log("hello world! from run.js")
 // print("salam")
 
 
-const hello = require('minimist')(process.argv.slice(2))
-console.log(hello)
+// const hello = require('minimist')(process.argv.slice(2))
+// console.log(hello)
 
 // process.argv.forEach((val,index) => {
 //     console.log(val)
@@ -132,20 +132,20 @@ console.log(hello)
 // }
 // masaj()
 
-const chalk = require('chalk')
-let print = console.log;
-print(chalk.red.italic.bgGreenBright("hello world"))
+// const chalk = require('chalk')
+// let print = console.log;
+// print(chalk.red.italic.bgGreenBright("hello world"))
 
-var ProgressBar = require('progress');
+// var ProgressBar = require('progress');
  
-var bar = new ProgressBar(':bar', { total: 20 });
-var timer = setInterval(() => {
-  bar.tick();
-  if (bar.complete) {
-    console.log('\ncomplete\n');
-    clearInterval(timer);
-  }
-}, 100);
+// var bar = new ProgressBar(':bar', { total: 20 });
+// var timer = setInterval(() => {
+//   bar.tick();
+//   if (bar.complete) {
+//     console.log('\ncomplete\n');
+//     clearInterval(timer);
+//   }
+// }, 100);
 
 // const http = require('http')
 
@@ -159,54 +159,87 @@ var timer = setInterval(() => {
 // )
 // server.listen(port, () => console.log(`server running at port ${port}`))
 
-const fs = require('fs');
-const http = require('http');
+// const fs = require('fs');
+// const http = require('http');
 
 
 
-http.createServer(function (req, res) {
-    var mainUrl = req.url.split('?');
-    console.log('Listening on port: 8080');
-    if(mainUrl[1]){
-        console.log(` now we have data!! heres your data : ${mainUrl[1]}`)
+// http.createServer(function (req, res) {
+//     var mainUrl = req.url.split('?');
+//     console.log('Listening on port: 8080');
+//     if(mainUrl[1]){
+//         console.log(` now we have data!! heres your data : ${mainUrl[1]}`)
+//     }
+//     var mimeTypes = {
+//         "html": "text/html",
+//         "jpeg": "image/jpeg",
+//         "jpg": "image/jpeg",
+//         "png": "image/png",
+//         "svg": "image/svg+xml",
+//         "json": "application/json",
+//         "js": "text/javascript",
+//         "css": "text/css"
+//     };
+
+//     let postdata = '';
+    
+//     req.on('data', datapart => {
+//         console.log('we recive data')
+//         console.log(datapart)
+//         postdata += datapart;
+//     })
+    
+//     req.on('data', () => {
+//         console.log(JSON.parse(postdata))
+//     })
+
+//     fs.readFile('F:/code/NodeJs/first_folder/html/page' + mainUrl[0], function (err, data) {
+//         if(err){
+//             res.writeHead(404);
+//             res.end(JSON.stringify(err))
+//             return;
+//         }
+//         var mimeType = mimeTypes[mainUrl[0].split('.').pop()];
+
+//         if (!mimeType) {
+//             mimeType = 'text/plain'
+//         }
+
+//         res.writeHead(200, { "Content-Type": mimeType });
+//         res.write(data, "binary");
+//         res.end();
+//     });
+// }).listen(8080);
+
+const fs = require("fs")
+
+class fib{
+    constructor(){
+        this.prev = 0;
+        this.current = 1;
     }
-    var mimeTypes = {
-        "html": "text/html",
-        "jpeg": "image/jpeg",
-        "jpg": "image/jpeg",
-        "png": "image/png",
-        "svg": "image/svg+xml",
-        "json": "application/json",
-        "js": "text/javascript",
-        "css": "text/css"
-    };
+    next(){
+        let current = this.current;
+        let prev = this.prev;
+        this.prev = this.current
+        this.current = current + prev;
+        return this.current
+    }
+}
 
-    let postdata = '';
-    
-    req.on('data', datapart => {
-        console.log('we recive data')
-        console.log(datapart)
-        postdata += datapart;
-    })
-    
-    req.on('data', () => {
-        console.log(JSON.parse(postdata))
-    })
+const writestream = fs.createWriteStream("fibonachi.txt")
 
-    fs.readFile('F:/code/NodeJs/first_folder/html/page' + mainUrl[0], function (err, data) {
-        if(err){
-            res.writeHead(404);
-            res.end(JSON.stringify(err))
-            return;
-        }
-        var mimeType = mimeTypes[mainUrl[0].split('.').pop()];
+writestream.on("ready", () => {
+    let f = new fib()
 
-        if (!mimeType) {
-            mimeType = 'text/plain'
-        }
-
-        res.writeHead(200, { "Content-Type": mimeType });
-        res.write(data, "binary");
-        res.end();
-    });
-}).listen(8080);
+    for(let i = 0; i <= 1000; i++){
+        let n = f.next();
+        writestream.write(String(n) + '\n', err =>{
+            if(err){
+                console.log(`there is an error : ${err}`)
+                return
+            }
+        })
+    }
+    writestream.end()
+})
